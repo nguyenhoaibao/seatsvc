@@ -14,11 +14,12 @@ type Service struct {
 	maxRowVal uint16 // max number of each row value
 
 	// each element in the seats represents one row in the airplane, it has
-	// 16 bit long, the max number for each element is 1 << seats_per_row.
+	// 16 bit long, and the max number for each element is 1 << seats_per_row.
 	// When assigning a seat, it assign from the right most bit first, if
-	// that bit is 1, that mean that seat is assigned, so the assign process
-	// will continue to the next bit, and so on, until it finds a bit that
-	// have value is 0. If all the rows are assigned, an error will be returned.
+	// that bit is 0, it'll set that to 1, then return. If not, that mean
+	// that seat is assigned, so the process will continue to select the next
+	// bit, and so on, until it finds a bit that has value is 0.
+	// If all the rows are assigned, an error will be returned.
 	seats []uint16
 }
 
